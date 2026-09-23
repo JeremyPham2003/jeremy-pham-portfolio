@@ -11,18 +11,22 @@
 </head>
 <body>
 
-<nav class="topbar">
-  <div class="wrap topbar-inner">
-    <a href="#top" class="topbar-name">Jeremy Pham</a>
-    <div class="topbar-links">
-      <a href="#about">About</a>
-      <a href="#experience">Experience</a>
-      <a href="#education">Education</a>
-      <a href="#skills">Skills</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </div>
-</nav>
+<button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+  <span></span><span></span><span></span>
+</button>
+
+<div class="side-nav-overlay" id="sideNavOverlay"></div>
+
+<aside class="side-nav" id="sideNav">
+  <a href="#top" class="side-nav-name">Jeremy Pham</a>
+  <nav class="side-nav-links">
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#education">Education</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</aside>
 
 <div class="wrap">
   <header class="hero" id="top">
@@ -193,6 +197,37 @@
 </main>
 
 <footer>© 2026 Jeremy Pham</footer>
+
+<script>
+  (function () {
+    var toggle = document.getElementById('menuToggle');
+    var nav = document.getElementById('sideNav');
+    var overlay = document.getElementById('sideNavOverlay');
+
+    function openNav() {
+      nav.classList.add('open');
+      overlay.classList.add('open');
+      toggle.classList.add('active');
+      toggle.setAttribute('aria-expanded', 'true');
+    }
+    function closeNav() {
+      nav.classList.remove('open');
+      overlay.classList.remove('open');
+      toggle.classList.remove('active');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+    toggle.addEventListener('click', function () {
+      nav.classList.contains('open') ? closeNav() : openNav();
+    });
+    overlay.addEventListener('click', closeNav);
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', closeNav);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeNav();
+    });
+  })();
+</script>
 
 </body>
 </html>
